@@ -1,13 +1,25 @@
 package br.com.leoapinheiro.screensound;
 
+import br.com.leoapinheiro.screensound.main.Main;
+import br.com.leoapinheiro.screensound.repository.ArtistRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ScreensoundApplication {
+public class ScreensoundApplication implements CommandLineRunner {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ScreensoundApplication.class, args);
-	}
+    @Autowired
+    private ArtistRepository repository;
 
+    public static void main(String[] args) {
+        SpringApplication.run(ScreensoundApplication.class, args);
+    }
+
+    @Override
+    public void run(String... args) throws Exception {
+        Main main = new Main(repository);
+        main.showMenu();
+    }
 }
