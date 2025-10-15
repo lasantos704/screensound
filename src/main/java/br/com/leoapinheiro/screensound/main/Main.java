@@ -57,13 +57,18 @@ public class Main {
     }
 
     private void registerArtist() {
-        System.out.println("Write the artist name:");
-        var name = scanner.nextLine();
-        System.out.println("Write the artist genre:");
-        var genre = scanner.nextLine();
-        Artist artist = new Artist(name, genre);
+        var registerNewArtist = "Y";
+        while (registerNewArtist.equalsIgnoreCase("Y")) {
+            System.out.println("Write the artist name:");
+            var name = scanner.nextLine();
+            System.out.println("Write the artist genre:");
+            var genre = scanner.nextLine();
+            Artist artist = new Artist(name, genre);
 
-        repository.save(artist);
+            repository.save(artist);
+            System.out.println("Do you want to add another artist? (Y/N)");
+            registerNewArtist = scanner.nextLine();
+        }
     }
 
     private void listRegisterArtists() {
