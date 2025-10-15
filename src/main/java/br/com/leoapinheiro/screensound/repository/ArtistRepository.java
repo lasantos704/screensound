@@ -11,8 +11,8 @@ import java.util.Optional;
 public interface ArtistRepository extends JpaRepository<Artist, Long> {
     Optional<Artist> findByArtistNameContainingIgnoreCase(String name);
 
-    @Query("SELECT a FROM Artist a JOIN a.tracks t ORDER BY t.artist")
-    List<Artist> listAllTracks();
+    @Query("SELECT t FROM Artist a JOIN a.tracks t ORDER BY t.artist")
+    List<Track> listAllTracks();
 
     @Query("SELECT t FROM Artist a JOIN a.tracks t WHERE a.artistName ILIKE %:artistName%")
     List<Track> searchTrackByArtist(String artistName);

@@ -41,6 +41,7 @@ public class Main {
                     break;
                 case 3:
                     listTracks();
+                    break;
                 case 4:
                     searchTrackByArtist();
                     break;
@@ -88,7 +89,9 @@ public class Main {
             var artistFound = artist.get();
             System.out.println("Write the music name:");
             var musicName = scanner.nextLine();
-            artistFound.setTracks(Collections.singletonList(new Track(musicName)));
+            Track track = new Track(musicName);
+            track.setArtist(artistFound);
+            artistFound.getTracks().add(track);
             repository.save(artistFound);
             System.out.println("Music added successfully.");
         } else {
@@ -107,8 +110,7 @@ public class Main {
         System.out.println("Write the artist name to search for their music:");
         var name = scanner.nextLine();
         var tracks = repository.searchTrackByArtist(name);
-        tracks.forEach(t ->
-                System.out.printf("Artist: %s - Track: %s%n", t.getArtist().getArtistName(), t.getTrackName()));
+        tracks.forEach(System.out::println);
     }
 
     private void searchInfoAboutAnArtist() {

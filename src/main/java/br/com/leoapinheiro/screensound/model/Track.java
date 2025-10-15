@@ -45,6 +45,6 @@ public class Track {
 
     @Override
     public String toString() {
-        return "trackName=" + trackName;
+        return "trackName=" + trackName + ", artist=" + artist.getArtistName();
     }
 }
