@@ -10,6 +10,6 @@ public class GeminiQuery {
                 "gemini-2.5-flash",
                 "Give me a brief summary in 255 characters total about the artist " + artistName + ".",
                 null );
-        return response.text().trim().substring(0, 255);
+        return response.text();
     }
 }

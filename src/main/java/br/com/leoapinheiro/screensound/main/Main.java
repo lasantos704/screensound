@@ -3,6 +3,7 @@ package br.com.leoapinheiro.screensound.main;
 import br.com.leoapinheiro.screensound.model.Artist;
 import br.com.leoapinheiro.screensound.model.Track;
 import br.com.leoapinheiro.screensound.repository.ArtistRepository;
+import br.com.leoapinheiro.screensound.service.GeminiQuery;
 
 import java.util.*;
 
@@ -117,7 +118,16 @@ public class Main {
         listRegisterArtists();
         System.out.println("Write the artist name to search for info:");
         var name = scanner.nextLine();
-        var about = repository.getAboutByArtist(name);
-        System.out.println(about);
+        var artist = repository.findByArtistNameContainingIgnoreCase(name);
+
+        if (artist.isPresent()) {
+            var artistFound = artist.get();
+            var about = GeminiQuery.getArtistInfo(name);
+            System.out.println("About the artist: \n" + about);
+            artistFound.setAbout(about.trim().substring(0, 240) + "...");
+            repository.save(artistFound);
+        } else {
+            System.out.println("Artist not found.");
+        }
     }
 }

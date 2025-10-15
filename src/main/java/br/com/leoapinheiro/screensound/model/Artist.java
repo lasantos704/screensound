@@ -25,8 +25,6 @@ public class Artist {
     public Artist(String artistName, String genre) {
         this.artistName = artistName;
         this.genre = Genre.fromString(genre);
-//        TODO: Implements todo in method not in constructor
-        this.about = GeminiQuery.getArtistInfo(artistName).trim();
     }
 
     public Long getId() {
